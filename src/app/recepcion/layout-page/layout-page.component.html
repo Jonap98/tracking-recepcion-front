@@ -1,38 +1,69 @@
-<div class="d-flex">
-  <div class="bg-dark border-right p-3" id="sidebar">
-    <h3 class="text-light">Sidebar</h3>
+<div class="wrapper">
 
-    <hr class="text-white">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture">
+                <h3>Anamika Roy</h3>
+                <p>Designer</p>
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="#" class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">My Dashboard</span>
+                    </a>
+                </li>
 
-    <div class="list-group list-reset">
-      <ul class="list-group-item">
-        <li class="list-item">Uno</li>
-        <li class="list-item">Dos</li>
-        <li class="list-item">Dos</li>
-      </ul>
-      <button class="list-group-item list-group-item-action">
-        Search
-      </button>
+                <li class="menuu">
+                  <input type="checkbox" name="list" id="nivel1-1">
+                  <label for="nivel1-1">Nivel 1</label>
+                  <ul class="interior">
+                        <li><input type="checkbox" name="list" id="nivel2-1"><label for="nivel2-1">Nivel 2</label>
+                          <ul class="interior">
+                            <li><a href="#r">Nivel 3</a></li>
+                            <li><a href="#r">Nivel 3</a></li>
+                           </ul>
+                        </li>
+                        <li><input type="checkbox" name="list" id="nivel2-2"><label for="nivel2-2">Nivel 2</label>
+                          <ul class="interior">
+                            <li><a href="#r">Nivel 3</a></li>
+                            <li><a href="#r">Nivel 3</a></li>
+                            <li><a href="#r">Nivel 3</a></li>
+                            <li><a href="#r">Nivel 3</a></li>
+                           </ul>
+                        </li>
+                        <li><a href="#r">Nivel 2</a></li>
+                     </ul>
+                  </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- Navbar -->
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+
+            <router-outlet></router-outlet>
+
+        </div>
+
+
     </div>
-
-  </div>
-
-  <div class="main-content">
-    <router-outlet></router-outlet>
-  </div>
-
-</div>
-
-
-
-<!-- <div class="d-flex" id="sidebar">
-  <h1>Layout page</h1>
-
-</div>
-
-<div class="container">
-
-  <router-outlet></router-outlet>
-
-</div> -->
 
