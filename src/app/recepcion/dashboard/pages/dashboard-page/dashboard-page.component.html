@@ -1,0 +1,47 @@
+<h2>Dashboard</h2>
+<hr>
+
+<ng-template #divLoading class="d-flex justify-content-center">
+  <div class="spinner-border text-primary"></div>
+</ng-template>
+
+<div class="d-flex justify-content-center">
+  <div class="spinner-border text-primary"></div>
+</div>
+
+
+<div class="table-card">
+  <table class="table table-striped m-2" *ngIf="paquetes; else divLoading">
+    <thead class="head">
+      <tr>
+        <th scope="col">Número de guía</th>
+        <th scope="col">Paquetería</th>
+        <th scope="col">Quién captura</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Área</th>
+        <th scope="col">Extensión</th>
+        <th scope="col">Empleado recibe</th>
+        <th scope="col">Fecha entregado</th>
+        <th scope="col">Status</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paquete of paquetes.paquetes">
+        <td>{{ paquete.numero_de_guia }}</td>
+        <td>{{ paquete.paqueteria }}</td>
+        <td>{{ paquete.quien_captura }}</td>
+        <td>{{ paquete.usuario }}</td>
+        <td>{{ paquete.correo }}</td>
+        <td>{{ paquete.area }}</td>
+        <td>{{ paquete.extension }}</td>
+        <td>{{ paquete.empleado_recibe }}</td>
+        <td>{{ paquete.fecha_entregado }}</td>
+        <td>{{ paquete.status }}</td>
+        <td><button class="btn btn-primary">Editar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

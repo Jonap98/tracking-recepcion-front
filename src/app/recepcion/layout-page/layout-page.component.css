@@ -1,0 +1,11 @@
+#sidebar {
+  height: 100vh;
+  width: 250px;
+  background-color: chocolate;
+
+}
+
+.main-content {
+  padding: 2rem;
+  width: 100%;
+}
