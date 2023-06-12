@@ -1,30 +1,50 @@
 <h2>Dashboard</h2>
-<hr>
+<hr class="divider">
 
 <ng-template #divLoading class="d-flex justify-content-center">
   <div class="spinner-border text-primary"></div>
 </ng-template>
 
-<div class="d-flex justify-content-center">
+<!-- <div class="d-flex justify-content-center">
   <div class="spinner-border text-primary"></div>
+</div> -->
+
+<div class="mb-2 d-flex justify-content-end">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete" >Registrar paquete</button>
 </div>
 
 
-<div class="table-card">
-  <table class="table table-striped m-2" *ngIf="paquetes; else divLoading">
+<!-- TODO: Forma correcta de usar modals  -->
+<!-- <dashboard-registrar-paquete
+  (onValue)="changeTitle('$event')"
+></dashboard-registrar-paquete> -->
+<dashboard-registrar-paquete
+  (onPaquete)="regPack($event)"
+></dashboard-registrar-paquete>
+<!-- <dashboard-registrar-paquete
+  (click)="regPack($event)"
+></dashboard-registrar-paquete> -->
+
+
+<confirmation-snackbar></confirmation-snackbar>
+
+<h1>Título: <b>{{ tituloMamalon }}</b></h1>
+
+<div class="table-card" style="overflow-x:auto;">
+  <table class="table table-striped m-2 table-responsive" *ngIf="paquetes; else divLoading">
     <thead class="head">
-      <tr>
-        <th scope="col">Número de guía</th>
-        <th scope="col">Paquetería</th>
-        <th scope="col">Quién captura</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Área</th>
-        <th scope="col">Extensión</th>
-        <th scope="col">Empleado recibe</th>
-        <th scope="col">Fecha entregado</th>
-        <th scope="col">Status</th>
-        <th scope="col">Acción</th>
+      <tr class="bg-dark">
+        <th scope="col" class="text-white">Número de guía</th>
+        <th scope="col" class="text-white">Paquetería</th>
+        <th scope="col" class="text-white">Quién captura</th>
+        <th scope="col" class="text-white">Usuario</th>
+        <th scope="col" class="text-white">Correo</th>
+        <th scope="col" class="text-white">Área</th>
+        <th scope="col" class="text-white">Extensión</th>
+        <th scope="col" class="text-white">Empleado recibe</th>
+        <th scope="col" class="text-white">Fecha entregado</th>
+        <th scope="col" class="text-white">Status</th>
+        <th scope="col" class="text-white">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -45,3 +65,4 @@
   </table>
 
 </div>
+

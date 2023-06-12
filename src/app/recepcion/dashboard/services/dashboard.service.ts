@@ -17,4 +17,25 @@ export class DashboardService {
     return this.http.get<Paquetes>(`${this.urlBase}/paquetes`);
   }
 
+  // registrarPaquete( paquete: Paquete ): void {
+  registrarPaquete( paquete: Paquete ): Observable<any> {
+    const resp = this.http.post(`${this.urlBase}/paquetes/create`, paquete
+    // {
+    //   // "id": 'id',
+    //   "numero_de_guia": 'numero_de_guia',
+    //   "paqueteria": 'paqueteria',
+    //   "quien_captura": 'quien_captura',
+    //   "usuario": 'usuario',
+    //   "correo": 'correo@gmail.com',
+    //   "area": 'area',
+    //   "extension": 'extension',
+    //   // "empleado_recibe": 'empleado_recibe',
+    //   // "fecha_entregado": 'fecha_entregado',
+    //   // "status": 'status',
+    // }
+    );
+
+    return resp;
+  }
+
 }

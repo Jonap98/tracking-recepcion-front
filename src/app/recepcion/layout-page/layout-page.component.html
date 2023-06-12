@@ -4,29 +4,39 @@
         <div class="sidebar">
            <!--profile image & text-->
            <div class="profile">
-                <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture">
-                <h3>Anamika Roy</h3>
-                <p>Designer</p>
+            <!-- <img src="assets/whirlpool-logo.png" alt=""> -->
+            <img src="assets/logo_blanco.png" alt="">
+            <hr class="divider">
+                <!-- <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture"> -->
+                <h3>Tracking</h3>
+                <p>Paqueteria</p>
             </div>
             <!--menu item-->
             <ul>
-                <li>
-                    <a href="#" class="active">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item">My Dashboard</span>
-                    </a>
+                <li
+                  [routerLink]="'./'"
+                  routerLinkActive="active"
+                >
+                  <span class="icon"><i class="fas fa-desktop"></i></span>
+                  <span class="item">My Dashboard</span>
                 </li>
 
-                <li class="menuu">
+                <li
+                  *ngFor="let item of sidebarItems"
+                  [routerLink]="item.url"
+                  routerLinkActive="active"
+                >
+                  <span class="icon"><i class="fas fa-desktop"></i></span>
+                  <span
+                    class="item"
+                  >{{ item.label }}</span>
+                </li>
+
+
+                <!-- <li class="menuu item">
                   <input type="checkbox" name="list" id="nivel1-1">
-                  <label for="nivel1-1">Nivel 1</label>
-                  <ul class="interior">
+                  <label for="nivel1-1">Catalogos</label>
+                  <ul class="interior item">
                         <li><input type="checkbox" name="list" id="nivel2-1"><label for="nivel2-1">Nivel 2</label>
                           <ul class="interior">
                             <li><a href="#r">Nivel 3</a></li>
@@ -43,7 +53,7 @@
                         </li>
                         <li><a href="#r">Nivel 2</a></li>
                      </ul>
-                  </li>
+                  </li> -->
 
             </ul>
 
@@ -60,7 +70,9 @@
                 </div>
             </div>
 
-            <router-outlet></router-outlet>
+            <div class="page-content">
+              <router-outlet></router-outlet>
+            </div>
 
         </div>
 

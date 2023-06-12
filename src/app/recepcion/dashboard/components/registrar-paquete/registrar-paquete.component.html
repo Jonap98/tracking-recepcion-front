@@ -1,0 +1,73 @@
+
+<div class="modal fade" id="registrarPaquete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar paquete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="paqueteForm"
+          #myForm="ngForm"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Número de guía</span>
+            <input type="text" class="form-control" formControlName="numero_de_guia">
+          </div>
+
+          <div class="m-2">
+            <span>Paquetería</span>
+            <input type="text" class="form-control" formControlName="paqueteria">
+          </div>
+
+          <div class="m-2">
+            <span>Quien captura</span>
+            <input type="text" class="form-control" formControlName="quien_captura">
+          </div>
+
+          <div class="m-2">
+            <span>Usuario destino</span>
+            <input type="text" class="form-control" formControlName="usuario">
+          </div>
+
+          <div class="m-2">
+            <span>Correo destino</span>
+            <input type="text" class="form-control" formControlName="correo">
+          </div>
+
+          <div class="m-2">
+            <span>Área</span>
+            <input type="text" class="form-control" formControlName="area">
+          </div>
+
+          <div class="m-2">
+            <span>Extensión</span>
+            <input type="text" class="form-control" formControlName="extension">
+          </div>
+
+          <!-- <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar</button> -->
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="mostrar()">Título</button> -->
+          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="registrarPaquete()">Confirmar</button> -->
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="myForm.onSubmit($event)">Confirmar</button> -->
+      </div>
+
+    </div>
+  </div>
+</div>

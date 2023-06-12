@@ -1,1 +1,35 @@
-<p>areas-page works!</p>
+<h2>Áreas</h2>
+<hr class="divider">
+
+<ng-template #divLoading class="d-flex justify-content-center">
+  <div class="spinner-border text-primary"></div>
+</ng-template>
+
+<div class="mb-2 d-flex justify-content-end">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete" >Registrar área</button>
+</div>
+
+
+<!-- TODO: Forma correcta de usar modals  -->
+<!-- <dashboard-registrar-paquete></dashboard-registrar-paquete> -->
+
+
+
+<div class="table-card" style="overflow-x:auto;">
+  <table class="table table-striped m-2 table-responsive" *ngIf="areas; else divLoading">
+    <thead class="head">
+      <tr class="bg-dark">
+        <th scope="col" class="text-white">Área</th>
+        <th scope="col" class="text-white">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let area of areas.areas">
+        <td>{{ area.area }}</td>
+        <td><button class="btn btn-primary">Editar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+

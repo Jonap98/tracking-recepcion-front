@@ -5,15 +5,15 @@ export interface Paquetes {
 }
 
 export interface Paquete {
-  id:              number;
-  numero_de_guia:  string;
-  paqueteria:      string;
-  quien_captura:   string;
-  usuario:         string;
-  correo:          string;
-  area:            string;
-  extension:       string;
-  empleado_recibe: null;
-  fecha_entregado: null;
-  status:          string;
+  id?:              number;
+  numero_de_guia:   string;
+  paqueteria:       string;
+  quien_captura:    string;
+  usuario:          string;
+  correo:           string;
+  area:             string;
+  extension:        string;
+  empleado_recibe?: null;
+  fecha_entregado?: null;
+  status?:          string;
 }
