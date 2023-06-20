@@ -4,5 +4,6 @@ export interface Areas {
 }
 
 export interface Area {
-  area: string
+  id: number;
+  area: string;
 }

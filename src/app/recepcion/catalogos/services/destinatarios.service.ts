@@ -22,4 +22,17 @@ export class DestinatariosService {
     return resp;
   }
 
+  editarDestinatario( id: number, nombre: string, correo: string, area: string ) {
+    const data = {
+      "id": id,
+      "nombre": nombre,
+      "correo": correo,
+      "area": area,
+    };
+
+    const resp = this.http.post(`${this.urlBase}/destinatarios/update`, data);
+
+    return resp;
+  }
+
 }

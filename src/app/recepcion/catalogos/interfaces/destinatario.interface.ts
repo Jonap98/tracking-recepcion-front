@@ -5,7 +5,8 @@ export interface Destinatarios {
 }
 
 export interface Destinatario {
-  nombre: string;
-  correo: string;
-  area:   string;
+  id:       number;
+  nombre:   string;
+  correo:   string;
+  area:     string;
 }

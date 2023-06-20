@@ -13,56 +13,12 @@
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete" >Registrar paquete</button>
 </div>
 
-
-<!-- TODO: Forma correcta de usar modals  -->
-<!-- <dashboard-registrar-paquete
-  (onValue)="changeTitle('$event')"
-></dashboard-registrar-paquete> -->
 <dashboard-registrar-paquete
   (onPaquete)="regPack($event)"
 ></dashboard-registrar-paquete>
-<!-- <dashboard-registrar-paquete
-  (click)="regPack($event)"
-></dashboard-registrar-paquete> -->
-
 
 <confirmation-snackbar></confirmation-snackbar>
 
-<h1>Título: <b>{{ tituloMamalon }}</b></h1>
-
-<div class="table-card" style="overflow-x:auto;">
-  <table class="table table-striped m-2 table-responsive" *ngIf="paquetes; else divLoading">
-    <thead class="head">
-      <tr class="bg-dark">
-        <th scope="col" class="text-white">Número de guía</th>
-        <th scope="col" class="text-white">Paquetería</th>
-        <th scope="col" class="text-white">Quién captura</th>
-        <th scope="col" class="text-white">Usuario</th>
-        <th scope="col" class="text-white">Correo</th>
-        <th scope="col" class="text-white">Área</th>
-        <th scope="col" class="text-white">Extensión</th>
-        <th scope="col" class="text-white">Empleado recibe</th>
-        <th scope="col" class="text-white">Fecha entregado</th>
-        <th scope="col" class="text-white">Status</th>
-        <th scope="col" class="text-white">Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let paquete of paquetes.paquetes">
-        <td>{{ paquete.numero_de_guia }}</td>
-        <td>{{ paquete.paqueteria }}</td>
-        <td>{{ paquete.quien_captura }}</td>
-        <td>{{ paquete.usuario }}</td>
-        <td>{{ paquete.correo }}</td>
-        <td>{{ paquete.area }}</td>
-        <td>{{ paquete.extension }}</td>
-        <td>{{ paquete.empleado_recibe }}</td>
-        <td>{{ paquete.fecha_entregado }}</td>
-        <td>{{ paquete.status }}</td>
-        <td><button class="btn btn-primary">Editar</button></td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
+<!-- <general-table [customTitle]="'El locote del barrio'"></general-table> -->
+<general-table *ngIf="paquetes" [informationData]="paquetes" ></general-table>
 

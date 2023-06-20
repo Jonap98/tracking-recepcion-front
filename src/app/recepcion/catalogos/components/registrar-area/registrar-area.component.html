@@ -1,0 +1,36 @@
+
+<div class="modal fade" id="registrarArea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar Área</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="areaForm"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Área</span>
+            <input type="text" class="form-control" formControlName="area">
+          </div>
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

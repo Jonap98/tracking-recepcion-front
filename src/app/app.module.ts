@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -15,9 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
 
-    SharedModule
+    SharedModule,
+  ],
+  exports: [
+    // ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,8 +16,22 @@ export class PaqueteriasService {
   }
 
   registrarPaqueteria( paqueteria: Paqueteria ): Observable<any> {
-    const resp = this.http.post(`${this.urlBase}/paqueteria/create`, paqueteria);
+    const resp = this.http.post(`${this.urlBase}/paqueterias/create`, paqueteria);
 
+    return resp;
+  }
+
+  // editarPaqueteria( paqueteria: Paqueteria ): Observable<any> {
+  editarPaqueteria( id: number, paqueteria: string ): Observable<any> {
+    // if( !paqueteria.paqueteria ) throw Error('El nombre es obligatorio');
+
+    // return this.http.patch<Paqueteria>(`${ this.urlBase }/paqueterias/update`, paqueteria);
+    const data = {
+      "id": id,
+      "paqueteria": paqueteria
+    };
+
+    const resp = this.http.post(`${ this.urlBase }/paqueterias/update`, data);
     return resp;
   }
 

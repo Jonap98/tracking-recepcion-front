@@ -21,4 +21,16 @@ export class AreaService {
     return resp;
   }
 
+  // editarArea( area: Area ): Observable<any> {
+  editarArea( id: number, area: string ): Observable<any> {
+    const data = {
+      "id": id,
+      "area": area
+    };
+
+    const resp = this.http.post(`${this.urlBase}/areas/update`, data);
+
+    return resp;
+  }
+
 }

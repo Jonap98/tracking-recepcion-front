@@ -13,7 +13,7 @@ export interface Paquete {
   correo:           string;
   area:             string;
   extension:        string;
-  empleado_recibe?: null;
-  fecha_entregado?: null;
+  empleado_recibe?: string;
+  fecha_entregado?: string;
   status?:          string;
 }

@@ -38,4 +38,19 @@ export class DashboardService {
     return resp;
   }
 
+  recibirPaquete( id: number, empleado: string ): Observable<any> {
+
+    console.log(`Paquete recibido por: ${empleado} con id: ${id}`);
+
+    const data = {
+      "id": id,
+      "empleado": empleado
+    };
+
+    const resp = this.http.post(`${ this.urlBase }/paquetes/update`, data );
+    console.log(resp);
+
+    return resp;
+  }
+
 }

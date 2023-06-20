@@ -4,5 +4,6 @@ export interface Paqueterias {
 }
 
 export interface Paqueteria {
+  id: number,
   paqueteria: string,
 }

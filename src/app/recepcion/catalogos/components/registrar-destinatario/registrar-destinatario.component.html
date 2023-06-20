@@ -1,0 +1,46 @@
+
+<div class="modal fade" id="registrarDestinatario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar Destinatario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="destinatarioForm"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Nombre</span>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre...">
+          </div>
+
+          <div class="m-2">
+            <span>Correo</span>
+            <input type="email" class="form-control" formControlName="correo" placeholder="Correo electrónico...">
+          </div>
+
+          <div class="m-2">
+            <span>Área</span>
+            <input type="text" class="form-control" formControlName="area" placeholder="Área...">
+          </div>
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este destinatario?</span>
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
