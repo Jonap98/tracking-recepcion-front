@@ -17,6 +17,16 @@ export class DashboardService {
     return this.http.get<Paquetes>(`${this.urlBase}/paquetes`);
   }
 
+  getPaquetesFilters( status: string ): Observable<Paquetes> {
+    const data = {
+      "status": status
+    };
+
+    return this.http.post<Paquetes>(`${this.urlBase}/paquetes/filters`, data);
+
+    // return resp;
+  }
+
   // registrarPaquete( paquete: Paquete ): void {
   registrarPaquete( paquete: Paquete ): Observable<any> {
     const resp = this.http.post(`${this.urlBase}/paquetes/create`, paquete

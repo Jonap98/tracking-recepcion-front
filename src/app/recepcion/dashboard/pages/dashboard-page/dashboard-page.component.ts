@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Paquete, Paquetes } from '../../interfaces/paquete.interface';
 import { DashboardService } from '../../services/dashboard.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -13,8 +14,13 @@ export class DashboardPageComponent implements OnInit {
   public paquetes?: Paquetes;
   public paqs?: Paquete[];
 
+  public statusForm: FormGroup = this.fb.group({
+    status: ['']
+  });
+
   constructor(
     private dashboardService: DashboardService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -27,19 +33,28 @@ export class DashboardPageComponent implements OnInit {
       });
   }
 
-  public tituloMamalon: string = 'Sin título';
+  dashboardFilters(): void {
+    this.dashboardService.getPaquetesFilters(this.statusForm.value.status)
+      .subscribe( paquetes => {
+        // console.log(paquetes);
+        console.log(this.statusForm.value);
 
-  changeTitle(  ): void {
-    this.tituloMamalon = 'Locototeeee';
+        // this.paquetes = paquetes;
+        // this.paquetes!.paquetes.map(map => map = paquetes)
+        // this.paquetes!.paquetes.pop();
+        this.paquetes!.paquetes.splice(0, this.paquetes!.paquetes.length);
+
+        paquetes.paquetes.forEach(element => {
+
+          this.paquetes!.paquetes.push(element)
+        });
+      });
   }
 
   regPack( paquete: Paquete ): void {
-  // regPackete( paquete: Paquete ): void {
-    this.tituloMamalon = 'Titulo mamalón';
 
     console.log('En dashboard component');
     console.log(paquete);
-    // this.paqs!.push(paquete);
 
     this.dashboardService.registrarPaquete( paquete )
       .subscribe( paquetes => {
@@ -48,16 +63,6 @@ export class DashboardPageComponent implements OnInit {
 
         this.paquetes!.paquetes.unshift(paquetes.data);
       })
-
-
-    // this.dashboardService.getPaquetes()
-    //   .subscribe( paquetes => {
-    //     console.log(paquetes);
-    //     this.paquetes = paquetes;
-
-    //     // return;
-    //   });
-    // // this.paquetes = this.paquetes[0];
   }
 
 

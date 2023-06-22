@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LayoutPageComponent } from "./layout-page/layout-page.component";
 import { Error404PageComponent } from "../shared/error404-page/error404-page.component";
+import { AuthGuard } from "../auth/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -14,7 +15,9 @@ const routes: Routes = [
       },
       {
         path: 'catalogos',
-        loadChildren: () => import('./catalogos/catalogos.module').then( m => m.CatalogosModule )
+        loadChildren: () => import('./catalogos/catalogos.module').then( m => m.CatalogosModule ),
+        canActivate: [ AuthGuard ],
+        canMatch: [ AuthGuard ]
       },
       {
         path: '404',
