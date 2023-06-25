@@ -19,6 +19,8 @@ export class AreasPageComponent implements OnInit {
 
   areasList: any[] = [];
 
+  public snackbarMessage: string = '';
+
   constructor(
     private areasService: AreaService,
     private fb: FormBuilder
@@ -46,6 +48,7 @@ export class AreasPageComponent implements OnInit {
   registrarArea( area: Area ): void {
     this.areasService.registrarArea( area )
       .subscribe( area => {
+        this.launchSnackbar(area.msg);
         this.areasList!.unshift(area.data);
       });
   }
@@ -73,6 +76,16 @@ export class AreasPageComponent implements OnInit {
 
   onCancel() {
     this.areaForm.reset();
+  }
+
+  public success: boolean = false;
+  launchSnackbar( message: string ) {
+    this.snackbarMessage = message;
+    this.success = true;
+
+    setTimeout(() => {
+      this.success = false;
+    }, 3000);
   }
 
 }

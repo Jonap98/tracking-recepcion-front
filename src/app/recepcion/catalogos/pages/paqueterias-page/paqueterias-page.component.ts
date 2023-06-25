@@ -19,6 +19,8 @@ export class PaqueteriasPageComponent implements OnInit {
 
   paqueteriasList: any[] = [];
 
+  public snackbarMessage: string = '';
+
   constructor(
     private paqueteriasService: PaqueteriasService,
     private fb: FormBuilder
@@ -42,6 +44,7 @@ export class PaqueteriasPageComponent implements OnInit {
   registrarPaqueteria( paqueteria: Paqueteria ): void {
     this.paqueteriasService.registrarPaqueteria( paqueteria )
       .subscribe( paqueteria => {
+        this.launchSnackbar(paqueteria.msg);
         this.paqueteriasList!.unshift( paqueteria.data )
       });
   }
@@ -64,6 +67,16 @@ export class PaqueteriasPageComponent implements OnInit {
 
       this.paqueteriaForm.reset();
 
+  }
+
+  public success: boolean = false;
+  launchSnackbar( message: string ) {
+    this.snackbarMessage = message;
+    this.success = true;
+
+    setTimeout(() => {
+      this.success = false;
+    }, 3000);
   }
 
 }

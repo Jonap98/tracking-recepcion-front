@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { GeneralTableComponent } from 'src/app/shared/components/general-table/general-table.component';
 import { RegistrarRecibidoComponent } from './components/registrar-recibido/registrar-recibido.component';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { RegistrarRecibidoComponent } from './components/registrar-recibido/regi
     ReactiveFormsModule,
     SharedModule,
 
+    TableModule,
     ButtonModule,
   ],
   exports: [

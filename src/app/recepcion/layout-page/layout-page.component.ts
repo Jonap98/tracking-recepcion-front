@@ -15,6 +15,7 @@ export class LayoutPageComponent implements OnInit{
   public isAuthenticated: boolean = false;
 
   public sidebarItems: any[] = [];
+  public navbarItems: any[] = [];
 
   constructor(
     private router: Router,
@@ -35,6 +36,10 @@ export class LayoutPageComponent implements OnInit{
       { label: 'Paqueterías', icon: 'area', url: './catalogos/paqueterias' },
     ]
     : [];
+
+    this.navbarItems = !this.isAuthenticated ? [
+      { label: 'Login', icon: 'area', url: '../auth' },
+    ] : [];
     // this.checkAuth();
     // this.authService.checkAuthentication()
     //     .pipe(
@@ -54,6 +59,11 @@ export class LayoutPageComponent implements OnInit{
     // const checkAuth: boolean = localStorage.getItem('token') ? true : false;
     // const auth =
     // console.log(auth);
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['./auth']);
   }
 
 

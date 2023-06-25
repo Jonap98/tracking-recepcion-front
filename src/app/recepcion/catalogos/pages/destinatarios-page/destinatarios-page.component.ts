@@ -21,6 +21,8 @@ export class DestinatariosPageComponent implements OnInit {
 
   destinatariosList: any[] = [];
 
+  public snackbarMessage: string = '';
+
   constructor(
     private destinatariosService: DestinatariosService,
     private fb: FormBuilder
@@ -37,6 +39,7 @@ export class DestinatariosPageComponent implements OnInit {
   registrarDestinatario( destinatario: Destinatario ): void {
     this.destinatariosService.registrarDestinatario( destinatario )
       .subscribe( destinatario => {
+        this.launchSnackbar(destinatario.msg);
         this.destinatariosList!.unshift( destinatario.data );
       })
   }
@@ -76,6 +79,16 @@ export class DestinatariosPageComponent implements OnInit {
 
   onCancel() {
     this.destinatarioForm.reset();
+  }
+
+  public success: boolean = false;
+  launchSnackbar( message: string ) {
+    this.snackbarMessage = message;
+    this.success = true;
+
+    setTimeout(() => {
+      this.success = false;
+    }, 3000);
   }
 
 }

@@ -32,6 +32,7 @@
 
 <div class="d-flex justify-content-end mb-2">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete">Registrar paquete</button>
+  <!-- <button class="btn btn-primary" (click)="launchSnackbar('Registro exitoso')">Registrar paquete</button> -->
 </div>
 
 <dashboard-registrar-paquete
@@ -40,6 +41,185 @@
 
 <confirmation-snackbar></confirmation-snackbar>
 
-<!-- <general-table [customTitle]="'El locote del barrio'"></general-table> -->
-<general-table *ngIf="paquetes" [informationData]="paquetes" ></general-table>
 
+<!-- OLD -->
+<!-- <general-table *ngIf="paquetes" [informationData]="paquetes" ></general-table> -->
+
+<!-- NEW -->
+<div class="card" >
+  <p-table
+      #dt
+      [value]="pqs"
+      dataKey="id"
+      [rowHover]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="false"
+      [paginator]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+      [filterDelay]="0"
+      [globalFilterFields]="['name', 'paqueteria', 'quien_captura', 'usuario', 'correo', 'area', 'extension', 'empleado_recibe', 'fecha_entregado', 'status']"
+  >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-2">Buscar paquete</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" class="form-control" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Buscar..." />
+            </span>
+        </div>
+    </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="numero_de_guia" style="min-width: 14rem">
+              <div class="flex justify-content-between align-items-center">
+                  Número de guía
+                  <p-sortIcon field="name"></p-sortIcon>
+                  <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+              </div>
+            </th>
+              <th pSortableColumn="paqueteria" style="min-width: 14rem">
+                  <div class="flex justify-content-between align-items-center">
+                      Paquetería
+                      <p-sortIcon field="paqueteria"></p-sortIcon>
+                      <p-columnFilter type="text" field="paqueteria" display="menu" class="ml-auto"></p-columnFilter>
+                  </div>
+              </th>
+              <th pSortableColumn="quien_captura" style="min-width: 14rem">
+                  <div class="flex justify-content-between align-items-center">
+                      Quien captura
+                      <p-sortIcon field="quien_captura"></p-sortIcon>
+                      <p-columnFilter type="text" field="quien_captura" display="menu" class="ml-auto"></p-columnFilter>
+                  </div>
+              </th>
+              <th pSortableColumn="usuario" style="min-width: 14rem">
+                <div class="flex justify-content-between align-items-center">
+                    Usuario
+                    <p-sortIcon field="usuario"></p-sortIcon>
+                    <p-columnFilter type="text" field="usuario" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+              </th>
+              <th pSortableColumn="correo" style="min-width: 14rem">
+                <div class="flex justify-content-between align-items-center">
+                    Correo
+                    <p-sortIcon field="correo"></p-sortIcon>
+                    <p-columnFilter type="text" field="correo" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+              </th>
+              <th pSortableColumn="area" style="min-width: 10rem">
+                  <div class="flex justify-content-between align-items-center">
+                      Área
+                      <p-sortIcon field="area"></p-sortIcon>
+                      <p-columnFilter type="text" field="correo" display="menu" class="ml-auto"></p-columnFilter>
+                  </div>
+              </th>
+              <th pSortableColumn="extension" style="min-width: 10rem">
+                  <div class="flex justify-content-between align-items-center">
+                      Extensión
+                      <p-sortIcon field="balance"></p-sortIcon>
+                      <p-columnFilter type="text" field="extension" display="menu" currency="USD" class="ml-auto"></p-columnFilter>
+                  </div>
+              </th>
+              <th pSortableColumn="empleado_recibe" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                    Empleado recibe
+                    <p-sortIcon field="balance"></p-sortIcon>
+                    <p-columnFilter type="text" field="empleado_recibe" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+              </th>
+              <th pSortableColumn="fecha_entregado" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                    Fecha entregado
+                    <p-sortIcon field="balance"></p-sortIcon>
+                    <p-columnFilter type="text" field="fecha_entregado" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+              </th>
+              <th pSortableColumn="status" style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                    Status
+                    <p-sortIcon field="balance"></p-sortIcon>
+                    <p-columnFilter type="text" field="status" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+              </th>
+              <th style="min-width: 10rem">
+                <div class="flex justify-content-between align-items-center">
+                    Acción
+                </div>
+              </th>
+          </tr>
+      </ng-template>
+
+      <!-- Body -->
+      <ng-template pTemplate="body" let-pqs>
+
+        <tr class="p-selectable-row" >
+          <td>{{ pqs.numero_de_guia }}</td>
+          <td>{{ pqs.paqueteria }}</td>
+          <td>{{ pqs.quien_captura }}</td>
+          <td>{{ pqs.usuario }}</td>
+          <td>{{ pqs.correo }}</td>
+          <td>{{ pqs.area }}</td>
+          <td>{{ pqs.extension }}</td>
+          <td>{{ pqs.empleado_recibe }}</td>
+          <td>{{ pqs.fecha_entregado }}</td>
+          <td>{{ pqs.status }}</td>
+          <td>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarRecibido" (click)="clickButton(pqs)" >Editar</button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="8">No hay información para mostrar</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+
+
+<div class="modal fade" id="registrarRecibido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar paquete recibido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="recibirPackForm"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Número de tarjeta</span>
+            <input type="text" class="form-control" formControlName="numero_tarjeta">
+          </div>
+
+          <div class="m-2">
+            <span>Empleado recibe</span>
+            <input type="text" class="form-control" formControlName="empleado_recibe">
+          </div>
+
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="snackbar" [ngClass]="success ? 'show' : ''" >{{ snackbarMessage }}</div>
