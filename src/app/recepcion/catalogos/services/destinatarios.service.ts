@@ -22,7 +22,7 @@ export class DestinatariosService {
     return resp;
   }
 
-  editarDestinatario( id: number, nombre: string, correo: string, area: string ) {
+    editarDestinatario( id: number, nombre: string, correo: string, area: string ) {
     const data = {
       "id": id,
       "nombre": nombre,

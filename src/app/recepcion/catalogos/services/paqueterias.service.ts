@@ -21,11 +21,8 @@ export class PaqueteriasService {
     return resp;
   }
 
-  // editarPaqueteria( paqueteria: Paqueteria ): Observable<any> {
   editarPaqueteria( id: number, paqueteria: string ): Observable<any> {
-    // if( !paqueteria.paqueteria ) throw Error('El nombre es obligatorio');
 
-    // return this.http.patch<Paqueteria>(`${ this.urlBase }/paqueterias/update`, paqueteria);
     const data = {
       "id": id,
       "paqueteria": paqueteria

@@ -1,43 +1,40 @@
+<div class="modal-body">
 
-<div class="modal fade" id="registrarRecibido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <form
+    [formGroup]="recibirPackForm!"
+    (ngSubmit)="onSubmit()"
+  >
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="titleModalLabel">Registrar paquete recibido</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <form>
-
-          <h3>{{ valor }}</h3>
-        <!-- <form
-          [formGroup]="paqueteForm"
-          #myForm="ngForm"
-          (ngSubmit)="onSubmit()"
-        > -->
-
-          <div class="m-2">
-            <span>Número de guía</span>
-            <input type="text" class="form-control" formControlName="numero_de_guia">
-          </div>
-
-
-        </form>
-
-        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
-
-
-      </div>
-
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Confirmar</button>
-          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button> -->
-      </div>
-
+    <div class="m-2">
+      <span>Número de tarjeta</span>
+      <input type="text" class="form-control" formControlName="numero_tarjeta" (keyup.enter)="search()">
     </div>
-  </div>
+
+    <div class="m-2" *ngIf="!usuarioRegistrado">
+      <span class="text-primary">Usuario no encontrado, por favor ingrese el nombre</span>
+    </div>
+
+    <div class="m-2" *ngIf="automatico else manual">
+      <span>OTR</span>
+      <input type="text" disabled class="form-control" placeholder="Nombre de empleado..." value="{{ nombre }}">
+    </div>
+
+    <ng-template #manual>
+      <div class="m-2">
+        <span>Empleado recibe</span>
+        <input type="text" class="form-control" formControlName="empleado_recibe" placeholder="Nombre de empleado..." value="nombre">
+      </div>
+    </ng-template>
+
+
+  </form>
+
+  <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancelar</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
 </div>

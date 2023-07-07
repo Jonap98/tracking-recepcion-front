@@ -30,20 +30,64 @@
 
 </div>
 
-<div class="d-flex justify-content-end mb-2">
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete">Registrar paquete</button>
+<div class="d-flex justify-content-end mb-2" *ngIf="isAuthenticated">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarPaquete" (click)="registrarPaquete()">Registrar paquete</button>
   <!-- <button class="btn btn-primary" (click)="launchSnackbar('Registro exitoso')">Registrar paquete</button> -->
 </div>
 
 <dashboard-registrar-paquete
+  [areas]="areas"
+  [paqueterias]="paqueterias"
   (onPaquete)="regPack($event)"
 ></dashboard-registrar-paquete>
 
+<div class="modal fade" id="registrarRecibido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar paquete recibido</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeModalContent()"></button>
+      </div>
+
+      <div *ngIf="!isRecibidoActive else registrarRecibidoContent"></div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editarPaquete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Editar Paquete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeModalContent()"></button>
+      </div>
+      <div *ngIf="!isActive else modalContent">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalContent>
+  <editar-paquete
+    [paquete]="paqueteSeleccionado"
+    [areas]="areas"
+    [paqueterias]="paqueterias"
+    (close)="closeModal()"
+  ></editar-paquete>
+</ng-template>
+
+<ng-template #registrarRecibidoContent>
+  <registrar-recibido
+    [paquete]="paqueteSeleccionado"
+    (close)="closeModal2($event)"
+  ></registrar-recibido>
+</ng-template>
+
 <confirmation-snackbar></confirmation-snackbar>
-
-
-<!-- OLD -->
-<!-- <general-table *ngIf="paquetes" [informationData]="paquetes" ></general-table> -->
 
 <!-- NEW -->
 <div class="card" >
@@ -59,7 +103,7 @@
       [paginator]="true"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
       [filterDelay]="0"
-      [globalFilterFields]="['name', 'paqueteria', 'quien_captura', 'usuario', 'correo', 'area', 'extension', 'empleado_recibe', 'fecha_entregado', 'status']"
+      [globalFilterFields]="['numero_de_guia', 'paqueteria', 'quien_captura', 'usuario', 'correo', 'area', 'extension', 'empleado_recibe', 'fecha_entregado', 'status']"
   >
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
@@ -75,8 +119,8 @@
             <th pSortableColumn="numero_de_guia" style="min-width: 14rem">
               <div class="flex justify-content-between align-items-center">
                   Número de guía
-                  <p-sortIcon field="name"></p-sortIcon>
-                  <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+                  <p-sortIcon field="numero_de_guia"></p-sortIcon>
+                  <p-columnFilter type="text" field="numero_de_guia" display="menu" class="ml-auto"></p-columnFilter>
               </div>
             </th>
               <th pSortableColumn="paqueteria" style="min-width: 14rem">
@@ -142,7 +186,7 @@
                     <p-columnFilter type="text" field="status" display="menu" class="ml-auto"></p-columnFilter>
                 </div>
               </th>
-              <th style="min-width: 10rem">
+              <th style="min-width: 10rem" *ngIf="isAuthenticated">
                 <div class="flex justify-content-between align-items-center">
                     Acción
                 </div>
@@ -164,8 +208,11 @@
           <td>{{ pqs.empleado_recibe }}</td>
           <td>{{ pqs.fecha_entregado }}</td>
           <td>{{ pqs.status }}</td>
-          <td>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarRecibido" (click)="clickButton(pqs)" >Editar</button>
+          <td *ngIf="isAuthenticated">
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editarPaquete" (click)="initModalContent(pqs)">Editar</button>
+              <button *ngIf="pqs.status == 'RECIBIDO'" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#registrarRecibido" (click)="clickButton(pqs)">Entregar</button>
+            </div>
           </td>
         </tr>
       </ng-template>
@@ -176,50 +223,5 @@
       </ng-template>
   </p-table>
 </div>
-
-
-<div class="modal fade" id="registrarRecibido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="titleModalLabel">Registrar paquete recibido</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <form
-          [formGroup]="recibirPackForm"
-          (ngSubmit)="onSubmit()"
-        >
-
-          <div class="m-2">
-            <span>Número de tarjeta</span>
-            <input type="text" class="form-control" formControlName="numero_tarjeta">
-          </div>
-
-          <div class="m-2">
-            <span>Empleado recibe</span>
-            <input type="text" class="form-control" formControlName="empleado_recibe">
-          </div>
-
-
-        </form>
-
-        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
-
-
-      </div>
-
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
 
 <div id="snackbar" [ngClass]="success ? 'show' : ''" >{{ snackbarMessage }}</div>

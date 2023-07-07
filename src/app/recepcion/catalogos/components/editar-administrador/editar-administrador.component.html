@@ -1,0 +1,28 @@
+<div class="modal-body">
+
+  <form
+    [formGroup]="usuarioEditForm!"
+    (ngSubmit)="onSubmit()"
+  >
+
+    <div class="m-2">
+      <span>Nombre</span>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="m-2">
+      <span>Correo</span>
+      <input type="text" class="form-control" formControlName="email">
+    </div>
+
+  </form>
+
+  <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+</div>
+

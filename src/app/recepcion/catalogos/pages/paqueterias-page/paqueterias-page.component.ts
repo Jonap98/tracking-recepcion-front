@@ -34,13 +34,6 @@ export class PaqueteriasPageComponent implements OnInit {
       });
   }
 
-  // editarPaqueteria( paqueteria: Paqueteria ): void {
-  //   this.paqueteriasService.editarPaqueteria( paqueteria )
-  //     .subscribe( paqueteria => {
-  //       console.log(paqueteria);
-  //     });
-  // }
-
   registrarPaqueteria( paqueteria: Paqueteria ): void {
     this.paqueteriasService.registrarPaqueteria( paqueteria )
       .subscribe( paqueteria => {
@@ -61,7 +54,6 @@ export class PaqueteriasPageComponent implements OnInit {
   onSubmit() {
     this.paqueteriasService.editarPaqueteria( this.id_paqueteria, this.paqueteriaForm.value.paqueteria )
       .subscribe( paqueteria => {
-        console.log(paqueteria);
         location.reload();
       })
 

@@ -9,13 +9,15 @@ import { ButtonModule } from 'primeng/button';
 import { GeneralTableComponent } from 'src/app/shared/components/general-table/general-table.component';
 import { RegistrarRecibidoComponent } from './components/registrar-recibido/registrar-recibido.component';
 import { TableModule } from 'primeng/table';
+import { EditarPaqueteComponent } from './components/editar-paquete/editar-paquete.component';
 
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     RegistrarPaqueteComponent,
-    // RegistrarRecibidoComponent,
+    EditarPaqueteComponent,
+    RegistrarRecibidoComponent,
   ],
   imports: [
     CommonModule,

@@ -21,7 +21,6 @@ export class AreaService {
     return resp;
   }
 
-  // editarArea( area: Area ): Observable<any> {
   editarArea( id: number, area: string ): Observable<any> {
     const data = {
       "id": id,

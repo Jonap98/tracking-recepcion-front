@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 
 
-export class LayoutPageComponent implements OnInit{
+export class LayoutPageComponent implements OnInit {
 
   public isAuthenticated: boolean = false;
 
@@ -23,49 +23,26 @@ export class LayoutPageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log('Autenticado:')
     const checkAuth: boolean = localStorage.getItem('token') ? true : false;
-    console.log(checkAuth);
     this.isAuthenticated = checkAuth;
-    console.log(this.isAuthenticated);
-    console.log(checkAuth);
 
     this.sidebarItems = this.isAuthenticated ? [
       { label: 'Áreas', icon: 'area', url: './catalogos/areas' },
       { label: 'Destinatarios', icon: 'area', url: './catalogos/destinatarios' },
       { label: 'Paqueterías', icon: 'area', url: './catalogos/paqueterias' },
+      { label: 'Administradores', icon: 'area', url: './catalogos/usuarios' },
     ]
     : [];
 
     this.navbarItems = !this.isAuthenticated ? [
       { label: 'Login', icon: 'area', url: '../auth' },
     ] : [];
-    // this.checkAuth();
-    // this.authService.checkAuthentication()
-    //     .pipe(
-    //       tap( isAuthenticated => console.log({isAuthenticated}) ),
-    //     )
 
-  }
-
-
-
-  // *ngFor="let item of sidebarItems"
-  //       [routerLink]="item.url"
-  //       (click)="sidenav.toggle()"
-
-  checkAuth() {
-
-    // const checkAuth: boolean = localStorage.getItem('token') ? true : false;
-    // const auth =
-    // console.log(auth);
   }
 
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['./auth']);
   }
-
-
 
 }

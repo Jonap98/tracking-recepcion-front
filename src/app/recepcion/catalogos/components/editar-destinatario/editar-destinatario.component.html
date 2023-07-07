@@ -1,0 +1,48 @@
+<!-- <div class="modal fade" id="editarDestinatario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content"> -->
+
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Editar Destinatarioooooo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> -->
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="destinatarioEditForm!"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Nombre</span>
+            <input type="text" class="form-control" formControlName="nombre">
+          </div>
+
+          <div class="m-2">
+            <span>Correo</span>
+            <input type="text" class="form-control" formControlName="correo">
+          </div>
+
+          <div class="m-2">
+            <span>Área</span>
+            <select class="form-select" formControlName="area">
+              <option value="{{ destinatario!.area }}" selected >{{ destinatario!.area }}</option>
+              <option value="{{ area.area }}" *ngFor="let area of areas">{{ area.area }}</option>
+            </select>
+          </div>
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+      </div>
+
+    <!-- </div>
+  </div>
+</div> -->

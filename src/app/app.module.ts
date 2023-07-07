@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TableModule } from 'primeng/table';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,10 @@ import { TableModule } from 'primeng/table';
 
     SharedModule,
   ],
-  exports: [
-    // ReactiveFormsModule
+  exports: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

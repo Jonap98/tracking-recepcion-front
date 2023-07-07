@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Paquete, Paquetes } from '../../interfaces/paquete.interface';
 import { DashboardService } from '../../services/dashboard.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsuariosTarjetaService } from '../../../catalogos/services/usuarios-tarjeta.service';
+import { AreaService } from 'src/app/recepcion/catalogos/services/areas.service';
+import { Area } from 'src/app/recepcion/catalogos/interfaces/area.interface';
+import { Paqueteria } from 'src/app/recepcion/catalogos/interfaces/paqueteria.interface';
+import { PaqueteriasService } from 'src/app/recepcion/catalogos/services/paqueterias.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -12,92 +17,120 @@ export class DashboardPageComponent implements OnInit {
 
   public pqs: any[] = [];
   public paquetes?: Paquetes;
-  // public paqs?: any[];
+
   public snackbarMessage: string = '';
+  public isAuthenticated: boolean = false;
+  public authOptions: any[] = [];
 
   public statusForm: FormGroup = this.fb.group({
     status: ['']
   });
 
-
-  public recibirPackForm: FormGroup = this.fb.group({
-    id_paquete: [0],
-    empleado_recibe: ['', Validators.required]
-  });
-
   constructor(
     private dashboardService: DashboardService,
+    private usuariosTarjetaService: UsuariosTarjetaService,
+    private areasService: AreaService,
+    private paqueteriasService: PaqueteriasService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    const checkAuth: boolean = localStorage.getItem('token') ? true : false;
+    this.isAuthenticated = checkAuth;
+
     this.dashboardService.getPaquetes()
       .subscribe( paquetes => {
         this.paquetes = paquetes;
         this.pqs = this.paquetes!.paquetes;
-
-        console.log('Start paquetes')
-        console.log(this.pqs);
-        console.log('End paquetes')
-
-        // return;
       });
   }
 
   dashboardFilters(): void {
     this.dashboardService.getPaquetesFilters(this.statusForm.value.status)
       .subscribe( paquetes => {
-
         this.paquetes = paquetes;
         this.pqs = this.paquetes!.paquetes;
-
-        // Jala pero se rompe la referencia de la cantidad
-        // console.log(this.statusForm.value);
-        // this.pqs!.splice(0, this.pqs!.length);
-        // paquetes.paquetes.forEach(element => {
-        //   this.pqs!.push(element)
-        // });
       });
   }
 
   regPack( paquete: Paquete ): void {
-    console.log('En dashboard component');
-    console.log(paquete);
     this.dashboardService.registrarPaquete( paquete )
       .subscribe( paquetes => {
         this.launchSnackbar(paquetes.msg);
-        console.log(paquetes.msg);
-        console.log(paquetes.data);
 
         this.pqs!.unshift(paquetes.data);
       })
   }
 
 
-  // Tabla
+  public areas?: Area[];
+  public paqueterias?: Paqueteria[];
+  registrarPaquete() {
+    this.areasService.getAreas()
+      .subscribe( areas => {
+        this.areas = areas.areas;
+    });
+
+    this.paqueteriasService.getPaqueterias()
+      .subscribe( paqueterias => {
+        this.paqueterias = paqueterias.paqueterias;
+    });
+  }
+
+  getAreas() {
+    this.areasService.getAreas()
+      .subscribe( areas => {
+        this.areas = areas.areas;
+    });
+  }
+
+  getPaqueterias() {
+    this.paqueteriasService.getPaqueterias()
+      .subscribe( paqueterias => {
+        this.paqueterias = paqueterias.paqueterias;
+    });
+  }
+
+  public isActive: boolean = false;
+  public isRecibidoActive: boolean = false;
+
+
+  public paqueteSeleccionado?: Paquete;
+  initModalContent( paquete: Paquete ) {
+    this.paqueteSeleccionado = paquete;
+    this.isActive = true;
+
+    if( !this.areas )
+      this.getAreas();
+
+    if( !this.paqueterias )
+      this.getPaqueterias();
+  }
 
   public valor: string = '';
   public id_paquete: number = 0;
   clickButton(pack: any) {
+    this.paqueteSeleccionado = pack;
+    this.isRecibidoActive = true;
     this.valor = pack.numero_de_guia;
     this.id_paquete = pack.id;
-    this.recibirPackForm.value.id_paquete = this.id_paquete;
   }
 
-  onSubmit() {
-    this.dashboardService.recibirPaquete( this.id_paquete, this.recibirPackForm.value.empleado_recibe  )
-      .subscribe( paquete => {
-        this.launchSnackbar(paquete.msg);
-        console.log(paquete);
-        console.log(paquete.data);
-        console.log(this.pqs.indexOf(paquete.data));
-      })
-
-    this.recibirPackForm.reset();
+  removeModalContent() {
+    this.isActive = false;
+    this.isRecibidoActive = false;
   }
 
-  onCancel() {
-    this.recibirPackForm.reset();
+  // Editar paquete
+  closeModal() {
+    this.removeModalContent();
+  }
+
+  // Entregar paquete
+  closeModal2(pack: any) {
+    this.pqs = this.pqs.filter( (val) => val.id !== pack.data.id )
+    this.launchSnackbar(pack.msg);
+    this.removeModalContent();
   }
 
   public success: boolean = false;

@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPageComponent {
 
   public loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   constructor(
@@ -22,13 +22,29 @@ export class LoginPageComponent {
   ) {}
 
   onLogin(): void {
-    if( this.loginForm.invalid ) return;
+    if( this.loginForm.invalid ) {
+      this.launchSnackbar('Inicio de sesión inválido, por favor revise sus credenciales nuevamente');
+
+      this.loginForm.reset();
+      return;
+    }
 
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe( user => {
-        // console.log(user);
         this.router.navigate(['/']);
       })
+  }
+
+  public success: boolean = false;
+  public snackbarMessage: string = '';
+
+  launchSnackbar( message: string ) {
+    this.snackbarMessage = message;
+    this.success = true;
+
+    setTimeout(() => {
+      this.success = false;
+    }, 3000);
   }
 
 }

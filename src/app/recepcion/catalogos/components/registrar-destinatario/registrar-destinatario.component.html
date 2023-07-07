@@ -27,7 +27,9 @@
 
           <div class="m-2">
             <span>Área</span>
-            <input type="text" class="form-control" formControlName="area" placeholder="Área...">
+            <select class="form-select" formControlName="area">
+              <option value="{{ area.area }}" *ngFor="let area of areas">{{ area.area }}</option>
+            </select>
           </div>
 
         </form>

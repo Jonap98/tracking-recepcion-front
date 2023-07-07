@@ -23,12 +23,13 @@
 
           <div class="m-2">
             <span>Paquetería</span>
-            <input type="text" class="form-control" formControlName="paqueteria">
+            <select class="form-select" formControlName="paqueteria">
+              <option value="{{ paqueteria.paqueteria }}" *ngFor="let paqueteria of paqueterias">{{ paqueteria.paqueteria }}</option>
+            </select>
           </div>
 
           <div class="m-2">
-            <span>Quien captura</span>
-            <input type="text" class="form-control" formControlName="quien_captura">
+            <input type="hidden" class="form-control" formControlName="quien_captura">
           </div>
 
           <div class="m-2">
@@ -43,15 +44,15 @@
 
           <div class="m-2">
             <span>Área</span>
-            <input type="text" class="form-control" formControlName="area">
+            <select class="form-select" formControlName="area">
+              <option value="{{ area.area }}" *ngFor="let area of areas">{{ area.area }}</option>
+            </select>
           </div>
 
           <div class="m-2">
             <span>Extensión</span>
             <input type="text" class="form-control" formControlName="extension">
           </div>
-
-          <!-- <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar</button> -->
 
         </form>
 
@@ -62,10 +63,7 @@
 
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="mostrar()">Título</button> -->
-          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="registrarPaquete()">Confirmar</button> -->
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
-          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="myForm.onSubmit($event)">Confirmar</button> -->
       </div>
 
     </div>

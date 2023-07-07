@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Destinatario, Destinatarios } from '../../interfaces/destinatario.interface';
 import { DestinatariosService } from '../../services/destinatarios.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Area } from '../../interfaces/area.interface';
+import { AreaService } from '../../services/areas.service';
 
 @Component({
   selector: 'app-destinatarios-page',
@@ -25,6 +27,7 @@ export class DestinatariosPageComponent implements OnInit {
 
   constructor(
     private destinatariosService: DestinatariosService,
+    private areasService: AreaService,
     private fb: FormBuilder
   ) {}
 
@@ -34,6 +37,32 @@ export class DestinatariosPageComponent implements OnInit {
         this.destinatarios = destinatarios;
         this.destinatariosList = this.destinatarios!.destinatarios;
       })
+  }
+
+  public areas?: Area[];
+  getAreas() {
+    this.areasService.getAreas()
+      .subscribe( areas => {
+        this.areas = areas.areas;
+    });
+  }
+
+  public isActive: boolean = false;
+  public destinatarioSeleccionado?: Destinatario;
+  initModalContent( destinatario: Destinatario ) {
+    this.destinatarioSeleccionado = destinatario;
+    this.isActive = true;
+
+    if( !this.areas )
+      this.getAreas();
+  }
+
+  removeModalContent() {
+    this.isActive = false;
+  }
+
+  closeModal() {
+    this.removeModalContent();
   }
 
   registrarDestinatario( destinatario: Destinatario ): void {
@@ -57,22 +86,21 @@ export class DestinatariosPageComponent implements OnInit {
     this.destinatarioForm.value.nombre = this.nombre;
     this.destinatarioForm.value.correo = this.correo;
     this.destinatarioForm.value.area = this.area;
-
   }
 
   onSubmit() {
-    this.nombre = this.destinatarioForm.value.nombre;
-    this.correo = this.destinatarioForm.value.correo;
-    this.area = this.destinatarioForm.value.area;
-    this.destinatariosService.editarDestinatario(
-      this.id_destinatario,
-      this.nombre,
-      this.correo,
-      this.area,
-    )
-    .subscribe( destinatario => {
-      console.log(destinatario);
-    });
+    // this.nombre = this.destinatarioForm.value.nombre;
+    // this.correo = this.destinatarioForm.value.correo;
+    // this.area = this.destinatarioForm.value.area;
+    // this.destinatariosService.editarDestinatario(
+    //   this.id_destinatario,
+    //   this.nombre,
+    //   this.correo,
+    //   this.area,
+    // )
+    // .subscribe( destinatario => {
+    //   console.log(destinatario);
+    // });
 
     // this.destinatarioForm.reset()
   }
@@ -90,5 +118,16 @@ export class DestinatariosPageComponent implements OnInit {
       this.success = false;
     }, 3000);
   }
+
+
+
+  // Testing new Dialog
+
+  // public visible: boolean = false;
+  // openNew() {
+  //   // this.product = {};
+  //   // this.submitted = false;
+  //   this.visible = true;
+  // }
 
 }

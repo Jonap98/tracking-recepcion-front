@@ -6,12 +6,24 @@
 </ng-template>
 
 <div class="mb-2 d-flex justify-content-end">
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarDestinatario">Registrar Destinatario</button>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarDestinatario" (click)="getAreas()">Registrar Destinatario</button>
 </div>
 
+<!-- Registrar destinatario -->
 <registrar-destinatario
+  [areas]="areas"
   (onDestinatario)="registrarDestinatario($event)"
 ></registrar-destinatario>
+
+<!-- Editar destinatario -->
+
+<ng-template #modalContent>
+  <editar-destinatario
+    [destinatario]="destinatarioSeleccionado"
+    [areas]="areas"
+    (close)="closeModal()"
+  ></editar-destinatario>
+</ng-template>
 
 <div class="card">
   <p-table
@@ -24,7 +36,7 @@
       [rowsPerPageOptions]="[10, 25, 50]"
       [loading]="false"
       [paginator]="true"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} registros"
       [filterDelay]="0"
       [globalFilterFields]="['nombre', 'correo', 'area']"
   >
@@ -75,59 +87,71 @@
         <td>{{ destinatariosList.nombre }}</td>
         <td>{{ destinatariosList.correo }}</td>
         <td>{{ destinatariosList.area }}</td>
-        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarDestinatario" (click)="setDestinatarioInfo( destinatariosList )">Editar</button></td>
+        <td>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarDestinatario" (click)="initModalContent(destinatariosList)">Editar</button>
+        </td>
       </tr>
     </ng-template>
   </p-table>
 </div>
 
-
-
-
-<div class="modal fade" id="editarDestinatario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+<div class="modal fade" id="editarDestinatario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title" id="titleModalLabel">Editar Destinatario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeModalContent()"></button>
       </div>
-
-      <div class="modal-body">
-
-        <form
-          [formGroup]="destinatarioForm"
-          (ngSubmit)="onSubmit()"
-        >
-
-          <div class="m-2">
-            <span>Nombre</span>
-            <input type="text" class="form-control" formControlName="nombre" value="{{ nombre }}">
-          </div>
-
-          <div class="m-2">
-            <span>Correo</span>
-            <input type="text" class="form-control" formControlName="correo" value="{{ correo }}">
-          </div>
-
-          <div class="m-2">
-            <span>Área</span>
-            <input type="text" class="form-control" formControlName="area" value="{{ area }}">
-          </div>
-
-        </form>
-
-        <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+      <div *ngIf="!isActive else modalContent">
 
       </div>
-
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
-      </div>
-
     </div>
   </div>
 </div>
 
 <div id="snackbar" [ngClass]="success ? 'show' : ''" >{{ snackbarMessage }}</div>
+
+
+
+
+<!-- Testing new Dialog -->
+
+<!-- <button class="btn btn-primary" (click)="openNew()">Editar</button></td> -->
+
+<!-- <p-dialog [(visible)]="visible" [style]="{ width: '450px' }" header="Product Details" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+      <div class="field">
+          <label class="mb-3">Category</label>
+          <div class="formgrid grid">
+              <div class="field-radiobutton col-6">
+                  <label for="category1">Accessories</label>
+              </div>
+              <div class="field-radiobutton col-6">
+                  <label for="category2">Clothing</label>
+              </div>
+              <div class="field-radiobutton col-6">
+                  <label for="category3">Electronics</label>
+              </div>
+              <div class="field-radiobutton col-6">
+                  <label for="category4">Fitness</label>
+              </div>
+          </div>
+      </div>
+
+      <div class="formgrid grid">
+          <div class="field col">
+              <label for="price">Price</label>
+              <input type="text" class="form-control">
+          </div>
+          <div class="field col">
+              <label for="quantity">Quantity</label>
+              <input type="text" class="form-control">
+          </div>
+      </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+      <button class="btn btn-success" >Guardar</button>
+  </ng-template>
+</p-dialog> -->

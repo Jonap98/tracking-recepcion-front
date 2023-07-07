@@ -1,0 +1,43 @@
+<div class="col-md-6 col-lg-7 d-flex align-items-center">
+  <div class="card-body p-4 p-lg-5 text-black">
+
+    <form
+      [formGroup]="registerForm"
+    >
+
+      <div class="d-flex align-items-center mb-3 pb-1">
+        <i class="fas fa-cubes fa-2x me-3" style="color: #dba625;"></i>
+        <!-- <span class="h1 fw-bold mb-0">Logo</span> -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Whirlpool_Corporation_Logo.png" alt="" width="50%">
+      </div>
+
+      <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;"> Tracking Recepción <b style="color: #feb300;">WRA</b> </h2>
+      <h2> <b>Iniciar sesión</b> </h2>
+
+      <hr>
+
+      <div class="form-outline mb-4">
+        <label>Correo</label>
+        <input type="email" formControlName="email" class="form-control form-control-lg" placeholder="example@whirlpool.com">
+      </div>
+
+      <div class="form-outline mb-4">
+        <span>Contraseña</span>
+        <input type="password" formControlName="password" class="form-control form-control-lg" />
+      </div>
+
+      <div class="pt-1 mb-4 d-grid gap-2">
+        <!-- <button class="btn btn-dark btn-lg btn-block" type="button" (click)="onLogin()">Login</button> -->
+        <button class="btn btn-dark btn-lg btn-block" type="button" >Registrar</button>
+      </div>
+
+      <a class="small text-muted" href="mailto:jonathan_isai_perez@whirlpool.com,mario_alberto_guerrero@whirlpool.com">¿Olvidaste tu contraseña?</a>
+      <p class="mb-5 pb-lg-2" style="color: #393f81;">¿No tienes una cuenta?
+        <b [routerLink]="'../../recepcion'" style="color: #393f81;">Entra como invitado</b>
+      </p>
+      <span class="small text-muted">Desarrollado por Materiales WRA. </span>
+      <a href="mailto:jonathan_isai_perez@whirlpool.com,mario_alberto_guerrero@whirlpool.com" class="small text-muted">Contactanos</a>
+    </form>
+
+  </div>
+</div>

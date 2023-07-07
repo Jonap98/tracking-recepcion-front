@@ -1,0 +1,53 @@
+
+<div class="modal fade" id="registrarAdministrador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModalLabel">Registrar Administradores</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form
+          [formGroup]="administradorForm"
+          (ngSubmit)="onSubmit()"
+        >
+
+          <div class="m-2">
+            <span>Nombre</span>
+            <input type="text" class="form-control" formControlName="name" placeholder="Nombre...">
+          </div>
+
+          <div class="m-2">
+            <span>Correo</span>
+            <input type="email" class="form-control" formControlName="email" placeholder="Correo electrónico...">
+          </div>
+
+          <div class="m-2">
+            <span>Contraseña</span>
+            <input type="password" class="form-control" formControlName="password" placeholder="Contraseña...">
+          </div>
+
+          <!-- <div class="m-2">
+            <span>Área</span>
+            <select class="form-select" formControlName="area">
+              <option value="{{ area.area }}" *ngFor="let area of areas">{{ area.area }}</option>
+            </select>
+          </div> -->
+
+        </form>
+
+        <span class="p-2">¿Seguro que desea registrar este destinatario?</span>
+
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

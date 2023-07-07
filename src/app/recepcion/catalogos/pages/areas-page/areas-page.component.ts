@@ -54,20 +54,15 @@ export class AreasPageComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.areasService.registrarArea( area: Area )
-    //   .subscribe( area => {
-    //     console.log(area);
-    //     location.reload();
-    //   })
-
-      this.areaForm.reset();
-
+    this.areaForm.reset();
   }
 
   onEdit() {
     this.areasService.editarArea( this.id_area, this.areaForm.value.area )
       .subscribe( area => {
-        console.log(area);
+        // console.log(area.area);
+        // this.product = { ...product };
+        // this.areasList = { ...area.area }
         location.reload();
       });
 

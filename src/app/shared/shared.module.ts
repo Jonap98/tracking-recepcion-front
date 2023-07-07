@@ -14,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     Error404PageComponent,
     SnackbarComponent,
     GeneralTableComponent,
-    RegistrarRecibidoComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +23,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     SnackbarComponent,
     GeneralTableComponent,
-    RegistrarRecibidoComponent
   ]
 })
 export class SharedModule { }

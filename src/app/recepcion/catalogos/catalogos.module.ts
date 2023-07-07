@@ -12,6 +12,10 @@ import { RegistrarDestinatarioComponent } from './components/registrar-destinata
 import { RegistrarPaqueteriaComponent } from './components/registrar-paqueteria/registrar-paqueteria.component';
 import { EditarAreaComponent } from './pages/areas-page/editar-area/editar-area.component';
 import { ActualizarAreaComponent } from './pages/areas-page/actualizar-area/actualizar-area.component';
+import { EditarDestinatarioComponent } from './components/editar-destinatario/editar-destinatario.component';
+import { RegistrarAdministradorComponent } from './components/registrar-administrador/registrar-administrador.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { EditarAdministradorComponent } from './components/editar-administrador/editar-administrador.component';
 
 
 
@@ -20,12 +24,18 @@ import { ActualizarAreaComponent } from './pages/areas-page/actualizar-area/actu
     AreasPageComponent,
     DestinatariosPageComponent,
     PaqueteriasPageComponent,
+    UsuariosComponent,
 
     RegistrarAreaComponent,
     RegistrarDestinatarioComponent,
     RegistrarPaqueteriaComponent,
+
     EditarAreaComponent,
-    ActualizarAreaComponent
+    ActualizarAreaComponent,
+    EditarDestinatarioComponent,
+
+    RegistrarAdministradorComponent,
+    EditarAdministradorComponent,
   ],
   imports: [
     CommonModule,

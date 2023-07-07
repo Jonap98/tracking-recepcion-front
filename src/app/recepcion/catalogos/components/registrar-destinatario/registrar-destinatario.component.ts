@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Destinatario, Destinatarios } from '../../interfaces/destinatario.interface';
+import { Area } from '../../interfaces/area.interface';
 
 @Component({
   selector: 'registrar-destinatario',
@@ -21,6 +22,9 @@ export class RegistrarDestinatarioComponent {
 
   @Output()
   public onDestinatario = new EventEmitter<Destinatario>();
+
+  @Input()
+  public areas?: Area[];
 
   onSubmit(): void {
     if( this.destinatarioForm.invalid ) {

@@ -15,10 +15,13 @@ export class PublicGuard {
   private checkAuthStatus(): boolean | Observable<boolean> {
     return this.authService.checkAuthentication()
       .pipe(
-        tap( isAuthenticated => console.log(isAuthenticated) ),
+        // tap( isAuthenticated => console.log(isAuthenticated) ),
         tap( isAuthenticated => {
           if( isAuthenticated )
-            this.router.navigate(['./']);
+            this.router.navigate(['./recepcion']);
+
+            // Este era el path a redireccionar cuando el root es recepcion
+            // this.router.navigate(['./']);
         }),
         map( isAuthenticated => !isAuthenticated )
       )

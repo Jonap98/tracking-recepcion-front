@@ -1,0 +1,60 @@
+
+<div class="modal-body">
+
+  <form
+    [formGroup]="paqueteForm!"
+    #myForm="ngForm"
+    (ngSubmit)="onSubmit()"
+  >
+
+    <div class="m-2">
+      <span>Número de guía</span>
+      <input type="text" class="form-control" formControlName="numero_de_guia">
+    </div>
+
+    <div class="m-2">
+      <span>Paquetería</span>
+      <select class="form-select" formControlName="paqueteria">
+        <option value="{{ paquete!.paqueteria }}" selected>{{ paquete!.paqueteria }}</option>
+        <option value="{{ paqueteria.paqueteria }}" *ngFor="let paqueteria of paqueterias">{{ paqueteria.paqueteria }}</option>
+      </select>
+    </div>
+
+    <div class="m-2">
+      <span>Quien captura</span>
+      <input type="text" class="form-control" formControlName="quien_captura">
+    </div>
+
+    <div class="m-2">
+      <span>Usuario destino</span>
+      <input type="text" class="form-control" formControlName="usuario">
+    </div>
+
+    <div class="m-2">
+      <span>Correo destino</span>
+      <input type="text" class="form-control" formControlName="correo">
+    </div>
+
+    <div class="m-2">
+      <span>Área</span>
+      <select class="form-select" formControlName="area">
+        <option value="{{ paquete!.area }}" selected>{{ paquete!.area }}</option>
+        <option value="{{ area.area }}" *ngFor="let area of areas">{{ area.area }}</option>
+      </select>
+    </div>
+
+    <div class="m-2">
+      <span>Extensión</span>
+      <input type="text" class="form-control" formControlName="extension">
+    </div>
+
+  </form>
+
+  <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+</div>

@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'recepcion',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
   {
