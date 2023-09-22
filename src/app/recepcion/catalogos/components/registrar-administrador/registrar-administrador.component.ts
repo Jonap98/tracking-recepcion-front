@@ -13,7 +13,7 @@ export class RegistrarAdministradorComponent {
     name: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
-    // area: ['', Validators.required],
+    admin: [false],
   });
 
   public administradores?: Users;
@@ -37,5 +37,4 @@ export class RegistrarAdministradorComponent {
 
     this.administradorForm.reset();
   }
-
 }

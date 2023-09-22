@@ -16,4 +16,5 @@ export interface Paquete {
   empleado_recibe?: string;
   fecha_entregado?: string;
   status?:          string;
+  fecha:          string;
 }

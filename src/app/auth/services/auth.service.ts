@@ -58,7 +58,8 @@ export class AuthService {
           // console.log(user.token)
         }),
         tap( user => localStorage.setItem( 'token', user.token!.toString() ) ),
-        tap( user => localStorage.setItem( 'usuario', user.user!.name!.toString() ) )
+        tap( user => localStorage.setItem( 'usuario', user.user!.name!.toString() ) ),
+        tap( user => localStorage.setItem( 'role', user.user!.role! ) ),
       )
   }
 

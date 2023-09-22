@@ -29,12 +29,12 @@
 
   </form>
 
-  <span class="p-2">¿Seguro que desea registrar este paquete?</span>
+  <span class="p-2">¿Seguro que desea entregar este paquete?</span>
 
 
 </div>
 
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancelar</button>
-    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
+    <button [ngClass]="recibirPackForm!.value.empleado_recibe == '' ? 'disabled' : '' " type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Confirmar</button>
 </div>

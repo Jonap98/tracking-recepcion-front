@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class LayoutPageComponent implements OnInit {
 
   public isAuthenticated: boolean = false;
+  public isAdmin: boolean = false;
 
   public sidebarItems: any[] = [];
   public navbarItems: any[] = [];
@@ -25,13 +26,18 @@ export class LayoutPageComponent implements OnInit {
   ngOnInit(): void {
     const checkAuth: boolean = localStorage.getItem('token') ? true : false;
     this.isAuthenticated = checkAuth;
+    const checkRole: boolean = localStorage.getItem('role') == 'LOBBY-admin' ? true : false;
+    this.isAdmin = checkRole;
 
-    this.sidebarItems = this.isAuthenticated ? [
+    this.sidebarItems = this.isAuthenticated ?
+      this.isAdmin ?
+    [
       { label: 'Áreas', icon: 'area', url: './catalogos/areas' },
       { label: 'Destinatarios', icon: 'area', url: './catalogos/destinatarios' },
       { label: 'Paqueterías', icon: 'area', url: './catalogos/paqueterias' },
-      { label: 'Administradores', icon: 'area', url: './catalogos/usuarios' },
+      { label: 'Usuarios', icon: 'area', url: './catalogos/usuarios' },
     ]
+    : []
     : [];
 
     this.navbarItems = !this.isAuthenticated ? [

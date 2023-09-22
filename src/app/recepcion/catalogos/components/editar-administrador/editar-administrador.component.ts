@@ -32,6 +32,7 @@ export class EditarAdministradorComponent {
       id: [this.usuario!.id],
       name: [this.usuario!.name, Validators.required],
       email: [this.usuario!.email],
+      role: [this.usuario!.role],
     });
   }
 
@@ -41,6 +42,7 @@ export class EditarAdministradorComponent {
       this.usuarioEditForm?.value.id,
       this.usuarioEditForm?.value.name,
       this.usuarioEditForm?.value.email,
+      this.usuarioEditForm?.value.role,
     )
     .subscribe( usuario => {
       location.reload();

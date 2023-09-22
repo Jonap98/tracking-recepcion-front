@@ -20,13 +20,13 @@ export class RegistrarPaqueteComponent {
 
   public paqueteForm = new FormGroup({
     // id: new FormControl<string>(''), // Nullable
-    numero_de_guia: new FormControl<string>('', { nonNullable: true }),
+    numero_de_guia: new FormControl<string>(''),
     paqueteria: new FormControl<string>('', { nonNullable: true }),
     quien_captura: new FormControl<string>(this.currentUser ?? '', { nonNullable: true }),
-    usuario: new FormControl<string>('', { nonNullable: true }),
-    correo: new FormControl<string>('', { nonNullable: true }),
-    area: new FormControl<string>('', { nonNullable: true }),
-    extension: new FormControl<string>('', { nonNullable: true }),
+    usuario: new FormControl<string>(''),
+    correo: new FormControl<string>(''),
+    area: new FormControl<string>(''),
+    extension: new FormControl<string>(''),
   });
 
   public paquetes?: Paquetes;

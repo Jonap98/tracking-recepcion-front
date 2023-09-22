@@ -7,6 +7,7 @@ import { AreaService } from 'src/app/recepcion/catalogos/services/areas.service'
 import { Area } from 'src/app/recepcion/catalogos/interfaces/area.interface';
 import { Paqueteria } from 'src/app/recepcion/catalogos/interfaces/paqueteria.interface';
 import { PaqueteriasService } from 'src/app/recepcion/catalogos/services/paqueterias.service';
+import { DatePipe, formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -21,6 +22,9 @@ export class DashboardPageComponent implements OnInit {
   public snackbarMessage: string = '';
   public isAuthenticated: boolean = false;
   public authOptions: any[] = [];
+
+  public today: Date = new Date();
+  public todayFormatted = formatDate(this.today, 'MM/dd/yyyy', 'en-US');
 
   public statusForm: FormGroup = this.fb.group({
     status: ['']
@@ -42,14 +46,56 @@ export class DashboardPageComponent implements OnInit {
       .subscribe( paquetes => {
         this.paquetes = paquetes;
         this.pqs = this.paquetes!.paquetes;
+
+        this.pqs.forEach(pack => {
+
+          const fechaFormatted = formatDate(pack.fecha, 'MM/dd/yyyy hh:mm', 'en-US');
+          pack.fecha = fechaFormatted;
+
+          const dia = formatDate(pack.fecha, 'MM/dd/yyyy', 'en-US');
+
+          const diff = this.diferenciaEntreDiasEnDias(new Date(dia), new Date(this.todayFormatted));
+
+          pack.diferencia = diff;
+        });
       });
+
   }
+
+
+  diferenciaEntreDiasEnDias(a: Date, b: Date): any{
+    var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    const diff = utc2 - utc1;
+
+    const difinsecs = diff / 1000;
+
+    const diffinhours = difinsecs / 3600;
+
+    const diffInDays = diffinhours / 24;
+
+    return diffInDays;
+  }
+
 
   dashboardFilters(): void {
     this.dashboardService.getPaquetesFilters(this.statusForm.value.status)
       .subscribe( paquetes => {
         this.paquetes = paquetes;
         this.pqs = this.paquetes!.paquetes;
+
+        this.pqs.forEach(pack => {
+
+          const fechaFormatted = formatDate(pack.fecha, 'MM/dd/yyyy hh:mm', 'en-US');
+          pack.fecha = fechaFormatted;
+
+          const dia = formatDate(pack.fecha, 'MM/dd/yyyy', 'en-US');
+
+          const diff = this.diferenciaEntreDiasEnDias(new Date(dia), new Date(this.todayFormatted));
+
+          pack.diferencia = diff;
+        });
       });
   }
 

@@ -22,11 +22,12 @@ export class UsuariosService {
     return resp;
   }
 
-    editarUsuario( id: number, nombre: string, correo: string ) {
+    editarUsuario( id: number, nombre: string, correo: string, role: string ) {
     const data = {
       "id": id,
       "name": nombre,
       "email": correo,
+      "role": role,
     };
 
     const resp = this.http.post(`${this.urlBase}/usuarios/update`, data);
